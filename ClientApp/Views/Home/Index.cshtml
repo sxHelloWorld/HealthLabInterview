@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="alert alert-warning" role="alert">
+    If you try any zipcode other than 14020 or 14586 you won't get a result. This is not a bug, it's a feature.
+</div>
+<p>Enter a zip code to get the weather forecast!</p>
+<form method="post">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="zipcode" placeholder="Zipcode" aria-label="Zipcode" aria-describedby="search-button">
+        <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="submit" id="search-button">Search</button>
+        </div>
+    </div>
+</form>
