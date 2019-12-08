@@ -28,7 +28,7 @@ namespace ClientApp
             services.AddControllersWithViews();
             services.AddHttpClient();
 
-            services.AddTransient<IForecastAccess, ForecastAccess>();
+            services.AddTransient<IHomeAccess, HomeAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

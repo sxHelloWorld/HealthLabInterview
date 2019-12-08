@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model QuestionnaireQuestionViewModel
+
+<p>@Model.CurrentQuestion.QuestionAsk</p>
+@if (Model.CurrentQuestion.Note.Length != 0)
+{
+    <p>Note: @Model.CurrentQuestion.Note</p>
+}
+
+<form method="post" src="/Questionnaire/View" class="input-group">
+    <input type="hidden" value="@Model.QuestionID" name="questionid" />
+    <input type="hidden" value="@Model.FormID" name="formid" />
+
+    @if (Model.CurrentAnswer.Answer != null)
+    {
+        <input type="hidden" value="@Model.CurrentAnswer.AnswerID" name="answerid"/>
+        <input type="text" class="form-text" name="answer" value="@Model.CurrentAnswer.Answer" />
+    }
+    else
+    {
+        <input type="text" class="form-text" name="answer" />
+    }
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+</form>
+<button src="/" class="btn btn-danger">Back</button>

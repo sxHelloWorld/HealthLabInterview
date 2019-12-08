@@ -1,0 +1,56 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model QuestionnaireListViewModel
+
+<form method="post" src="/Logout">
+    <div class="input-group">
+        <p>Welcome Patient!</p>
+        <button class="btn btn-outline-primary" type="submit" id="logout-button">Logout</button>
+    </div>
+    
+</form>
+
+@foreach (var questionnaire in Model.questionnaires)
+{
+    <p>@questionnaire.Title</p>
+    @if (Model.questionnaireTracks.Any(q => q.FormID == questionnaire.FormID))
+    {
+        var track = Model.questionnaireTracks.Single(q => q.FormID == questionnaire.FormID);
+        if (track.Complete)
+        {
+            <p>Submitted. You may view the questionnaire</p>
+        }
+        else if (track.Review)
+        {
+            <p>You may review the questionnaire</p>
+        }
+        if (track.Complete || track.Review)
+        {
+            <form method="post" src="/Questionnaire/Review" class="input-group">
+                <input type="hidden" value="@track.FormID" id="formid" name="formid"/>
+                <input type="hidden" value="@questionnaire.Title" id="formtitle" name="formtitle"/>
+                <button class="btn btn-outline-primary" type="submit">Review</button>
+            </form>
+        }
+        else
+        {
+            <form method="post" src="/Questionnaire" class="input-group">
+                <input type="hidden" value="@track.FormID" id="formid" name="formid"/>
+                <input type="hidden" value="@questionnaire.Title" id="formtitle" name="formtitle"/>
+                <button class="btn btn-outline-primary" type="submit">Continue</button>
+            </form>
+        }
+    }
+    else
+    {
+        <form method="post" src="/Questionnaire" class="input-group">
+            <input type="hidden" value="@questionnaire.FormID" id="formid" name="formid"/>
+            <input type="hidden" value="@questionnaire.Title" id="formtitle" name="formtitle"/>
+            <button class="btn btn-outline-primary" type="submit">Begin</button>
+        </form>
+    }
+}
