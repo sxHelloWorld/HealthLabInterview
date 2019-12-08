@@ -17,6 +17,9 @@ namespace IntervieweeProject
 {
     public class Startup
     {
+
+    	// Checked all the requirements in the issues tab
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -35,7 +38,9 @@ namespace IntervieweeProject
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
 
-            services.AddTransient<IWeatherAccess, WeatherAccess>();
+            services.AddTransient<IPatientAccess, PatientAccess>();
+            services.AddTransient<IQuestionnaireAccess, QuestionnaireAccess>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
